@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "firebase": "^9.0.0"
+  },
+  "name": "todo",
+  "version": "1.0.0",
+  "main": "js.js",
+  "repository": "https://github.com/tvio/todo.git",
+  "author": "tvio <tvio@centrum.cz>",
+  "license": "MIT",
+  "devDependencies": {
+    "parcel": "^2.0.0"
+  }
+}
