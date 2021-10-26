@@ -1,5 +1,6 @@
 //nedavat chyby do konzole ale do na obr.
 // osetrit chyby auth
+//prehodit where pro hledani
 'use strict'
 import {
     getFirestore,
@@ -7,6 +8,9 @@ import {
     getDocs,
     where,
     query,
+    setDoc,
+    doc,
+    addDoc
   } from 'firebase/firestore'
   // import { GoogleAuthProvider } from 'firebase/auth'
   import { initializeApp } from 'firebase/app'
@@ -48,6 +52,7 @@ import {
   
   //Sign in with email and pass.
   const auth = getAuth()
+  this.db = getFirestore(this.app)
   await signInWithEmailAndPassword(auth, 'tvio@centrum.cz', '123Heslo')
     .then((userCredential) => {
       // Signed in
@@ -59,22 +64,19 @@ import {
       const errorCode = error.code
       const errorMessage = error.message
     })
-  
- 
-  
-
+    
   
  },
 
   async  readAll() {
     try {
-        this.db = getFirestore(this.app)
+        
       //const user = auth.currentUser
       console.log(this.db)
       const q = query(
         
-        collection(this.db, 'test'),
-        where('hodnota', '==', 'test')
+        collection(this.db, 'test')
+        //where('hodnota', '==', 'test')
         // where('author', '==', user.uid)
       )
       console.log('deje se neco?')
@@ -88,6 +90,14 @@ import {
     } catch (e) {
       console.log(e)
     }
+  },
+  async delete(id){
+
+ null;
+  },
+  async add(hodnota){
+    const ret = await  addDoc(collection(this.db,'test'),{hodnota} )
+    console.log(ret.id)
   }
 }
 
