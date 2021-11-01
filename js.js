@@ -16,12 +16,26 @@ const todo = {
  
    //deleteTag : document.querySelector('.delete'),
    addTag : document.querySelector('.plus'),
+   mainTag : document.getElementById('con'),
+   //deleteTag: 'dynamic predelat',
    async add(){
      await db.add()
+     console.log('proc tohle nepise')
+    while (this.mainTag.firstChild){
+      console.log('remuvuju',this.mainTag.firstChild)
+      this.mainTag.firstChild.remove()
+    }
+     await db.readAll()
    },
    async runx() { 
      await db.init()
      await db.readAll()
+  },
+    async delete(){
+      await db.delete()
+      this.mainTag.innerHTML =''
+      await db.readAll(); 
+
   }
        
    
@@ -29,10 +43,26 @@ const todo = {
 
 
 
-window.onload = ()=>{todo.runx()}
+window.onload = ()=>{
+  todo.runx()
+  todo.addTag.addEventListener('click',()=>{
+    db.add('ahooooooooooooooooj')
+     db.readAll()
+   })
+   window.addEventListener('click',(e)=>{
+     console.log(e.target)
+     if (e.target.classList.contains('delete')){
+       console.log('clicked od delete')
+            console.log('id',e.target.parentNode.id)
+            db.delete(e.target.parentNode.id)
+     }
+   })
+  
+}
+
 
 
 // todo.deleteTag.addEventListerner('click',()=>db.delete())
 
-todo.addTag.addEventListener('click',()=>db.add('velka poznamka'))
-todo.deleteTag.addEventListener('click',()=>db.delete(ideck))
+
+//todo.deleteTag.addEventListener('click',()=>db.delete(ideck))

@@ -10,7 +10,8 @@ import {
     query,
     setDoc,
     doc,
-    addDoc
+    addDoc,
+    deleteDoc
   } from 'firebase/firestore'
   // import { GoogleAuthProvider } from 'firebase/auth'
   import { initializeApp } from 'firebase/app'
@@ -57,7 +58,7 @@ import {
     .then((userCredential) => {
       // Signed in
       const user = userCredential.user
-      console.log(user)
+     // console.log(user)
       // ...
     })
     .catch((error) => {
@@ -72,19 +73,19 @@ import {
     try {
         
       //const user = auth.currentUser
-      console.log(this.db)
+      //console.log(this.db)
+           
       const q = query(
         
         collection(this.db, 'test')
         //where('hodnota', '==', 'test')
         // where('author', '==', user.uid)
       )
-      console.log('deje se neco?')
+      //console.log('deje se neco?')
       const querySnapshot = await getDocs(q)
       querySnapshot.forEach((doc) => {
-  
-        console.log(doc.id, ' => ', doc.data())
-        this.conTag.innerHTML += `<p class="karta">id:${doc.id},data:${doc.data().hodnota}<i class="delete material-icons">delete</i></p>`
+  // console.log(doc.id, ' => ', doc.data())
+        this.conTag.innerHTML += `<p class="karta" id=${doc.id}>id:${doc.id},data:${doc.data().hodnota}<i class="delete material-icons">delete</i></p>`
         
       })
     } catch (e) {
@@ -92,13 +93,15 @@ import {
     }
   },
   async delete(id){
-
- null;
+     await deleteDoc(doc(this.db,'test',id))
+    
   },
   async add(hodnota){
     const ret = await  addDoc(collection(this.db,'test'),{hodnota} )
     console.log(ret.id)
+    
   }
+  
 }
 
 export default db
