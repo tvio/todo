@@ -93,13 +93,20 @@ import {
     }
   },
   async delete(id){
-     await deleteDoc(doc(this.db,'test',id))
-    
+     try {
+     const ret = await deleteDoc(doc(this.db,'test',id))
+
+     console.log(ret)
+     }
+     catch(e){
+       console.log(e)
+     }
   },
   async add(hodnota){
-    const ret = await  addDoc(collection(this.db,'test'),{hodnota} )
-    console.log(ret.id)
-    
+     ret = await  addDoc(collection(this.db,'test'),{hodnota} )
+    console.log(ret)
+    //await db.collection('test').doc().set(hodnota)
+    return ret
   }
   
 }
