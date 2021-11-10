@@ -7,6 +7,7 @@
   }
   body {
     width: 100%;
+   
   }
 
 
@@ -49,8 +50,12 @@
          float:right}
 
 .plus{
-  float: right;
-  font-size: 8vw;
+
+  position: absolute;
+  font-weight: 900;
+  right:0px;
+   bottom: 1px;
+  font-size: 3vw;
   color:white;
   text-shadow: 2px 2px black;
 }
@@ -68,16 +73,18 @@
 }
 
 form {
- 
+ position: relative;
  margin: 0 auto;
- background-color: cornflowerblue;
  width: 52%;
+ outline:0.2vw solid lightskyblue;
  border-radius: 3px;
  
 }
 textarea{
   margin-top: 1vh;
-  width: 95%;
+  font-size: 1.5vw;
+  padding-left: 0.5vw;
+  width: 98%;
   margin-bottom: 1vh;
 }
 

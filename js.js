@@ -1,3 +1,4 @@
+//pridat plusko na hlavni stranku, po kliknuti disabled a zobrazit form.
 
 
 //nefujguje spravne add
