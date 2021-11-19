@@ -14,9 +14,10 @@
 import db from './db'
 const todo = {
   //deleteTag : document.querySelector('.delete'),
-  addForm: document.querySelect('.plusFirst'),
+  addForm: document.querySelector('.plusFirst'),
   addTag: document.querySelector('.plus'),
   mainTag: document.getElementById('con'),
+  formTag: document.getElementsByTagName('form'),
   //deleteTag: 'dynamic predelat',
   async add(hodnota) {
     await db.add(hodnota)
@@ -49,6 +50,11 @@ window.onload = () => {
       console.log('id', e.target.parentNode.id)
       todo.delete(e.target.parentNode.id)
     }
+  })
+  todo.addForm.addEventListener('click', () => {
+    console.log('clicked')
+    console.log('form', todo.formTag)
+    todo.formTag.style.color = 'red'
   })
 }
 
