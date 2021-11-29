@@ -1,9 +1,14 @@
-//pridat plusko na hlavni stranku, po kliknuti disabled a zobrazit form.
+//nejde mi add do databaze, nekde to volam driv nez pri stisku toho addtlacitka
+//propjeni obou tlacitke!!!????
+//Delam na pridavaci funkci s komepltnimi daty
 
-//nefujguje spravne add
-//nemam check na kazdek delete, dat listener na document nebo lepe?
+//pridat datum vlozeni do DB, pripadne datum modifikace
+// pridat update
+//ocekovat fungovani spravne delete
+
+//nemam check na kazdek delete, dat listener na document nebo lepe? Tohle je nebo neni?
 // identifikovat radek, na kterem delam delete, identifovkat zaznam v dB
-//prehodit generovani html z DB do JS
+//prehodit generovani html z DB do JS funkce maluj
 // dat rules jen na uzivatele tvio@centrum.cz
 //nepredelat na CDN? nepredelat na REST?
 // otestovat get 1  , PUT a SET
@@ -17,11 +22,12 @@ const todo = {
   addForm: document.querySelector('.plusFirst'),
   addTag: document.querySelector('.plus'),
   mainTag: document.getElementById('con'),
-  formTag: document.getElementsByTagName('form'),
+  formTag: document.getElementById('form'),
+
   //deleteTag: 'dynamic predelat',
-  async add(hodnota) {
-    await db.add(hodnota)
-    console.log('proc tohle nepise')
+  async add(ukol, termin, top, barva) {
+    await db.add(ukol, termin, top, barva)
+    console.log('jdeme na cteni po vlozeni')
     while (this.mainTag.firstChild) {
       this.mainTag.firstChild.remove()
     }
@@ -41,20 +47,35 @@ const todo = {
 window.onload = () => {
   todo.runx()
   todo.addTag.addEventListener('click', () => {
-    todo.add('ahooooooooooooooooj')
+    //nacti inputy
+    const ukol = document.getElementsByName('ukol')
+    const termin = document.getElementsByName('termin')
+    const top = document.getElementsByName('top')
+    const barva = document.getElementsByName('barva')
+
+    //cele by to melo jet sekvence
+    //atributy z formu predej do DB
+    //pridej try/catchblcok kdyz insert nedopadne
+    todo.add(ukol.value, termin.value, top.value, barva.value)
+    //napis hlasku o pridani
+
+    //vypni form a zobraz puvoni plusitko
+    todo.formTag.style.display = 'none'
+    todo.addForm.style.display = 'block'
   })
   window.addEventListener('click', (e) => {
     console.log(e.target)
     if (e.target.classList.contains('delete')) {
       //console.log('clicked od delete')
-      console.log('id', e.target.parentNode.id)
+      //console.log('id', e.target.parentNode.id)
       todo.delete(e.target.parentNode.id)
     }
   })
   todo.addForm.addEventListener('click', () => {
     console.log('clicked')
     console.log('form', todo.formTag)
-    todo.formTag.style.color = 'red'
+    todo.formTag.style.display = 'block'
+    todo.addForm.style.display = 'none'
   })
 }
 

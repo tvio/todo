@@ -16,21 +16,22 @@
       <div class="header">
         <i class="material-icons plus plusFirst">add</i>
       </div>
-
-      <form>
-        <div id="inp">
-          <textarea name="Úkol" id="ukol" rows="2" cols="50"></textarea>
-          <div class="blok">
-            <label>Datum</label>
-            <input type="date" name="termin" id="termin" />
-            <label>Top</label>
-            <input type="checkbox" name="top" id="top" />
-            <label>Barva</label>
-            <input type="color" name="barva" id="barva" value="#99badd" />
+      <div id="form">
+        <form>
+          <div id="inp">
+            <textarea name="ukol" id="ukol" rows="2" cols="50"></textarea>
+            <div class="blok">
+              <label>Datum</label>
+              <input type="date" name="termin" id="termin" />
+              <label>Top</label>
+              <input type="checkbox" name="top" id="top" />
+              <label>Barva</label>
+              <input type="color" name="barva" id="barva" value="#99badd" />
+            </div>
+            <i class="material-icons plus">add</i>
           </div>
-          <i class="material-icons plus">add</i>
-        </div>
-      </form>
+        </form>
+      </div>
     </div>
     <div id="con"></div>
     <script src="js.js" type="module"></script>

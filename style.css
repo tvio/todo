@@ -79,7 +79,7 @@ body {
   align-items: center;
 }
 
-form {
+#form {
   display: none;
   position: relative;
   margin: 0 auto;
@@ -88,6 +88,11 @@ form {
   outline: 0.2vw solid lightskyblue;
   border-radius: 3px;
 }
+
+#form form {
+  display: inherit;
+}
+
 textarea {
   margin-top: 1vh;
   margin-right: 4vw;
