@@ -1,3 +1,5 @@
+// refaktor na form[0], ale zatim nereaguje tlacitko plus na zobraznei formu, opravit chybu v konzoli
+
 //nejde mi add do databaze, nekde to volam driv nez pri stisku toho addtlacitka
 //propjeni obou tlacitke!!!????
 //Delam na pridavaci funkci s komepltnimi daty
@@ -19,8 +21,8 @@
 import db from './db'
 const todo = {
   //deleteTag : document.querySelector('.delete'),
-  addForm: document.querySelector('.plusFirst'),
-  addTag: document.querySelector('.plus'),
+  addForm: document.querySelector('plusFirst'),
+  addTag: document.querySelector('plus'),
   mainTag: document.getElementById('con'),
   formTag: document.getElementById('form'),
 
@@ -60,7 +62,7 @@ window.onload = () => {
     //napis hlasku o pridani
 
     //vypni form a zobraz puvoni plusitko
-    todo.formTag.style.display = 'none'
+    todo.formTag[0].style.display = 'none'
     todo.addForm.style.display = 'block'
   })
   window.addEventListener('click', (e) => {
@@ -74,7 +76,7 @@ window.onload = () => {
   todo.addForm.addEventListener('click', () => {
     console.log('clicked')
     console.log('form', todo.formTag)
-    todo.formTag.style.display = 'block'
+    todo.formTag[0].style.display = 'block'
     todo.addForm.style.display = 'none'
   })
 }

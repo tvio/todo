@@ -52,7 +52,8 @@ body {
   float: right;
 }
 
-.plus {
+#plus {
+
   position: absolute;
   font-weight: 900;
   right: 0px;
@@ -62,10 +63,16 @@ body {
   text-shadow: 2px 2px black;
 }
 
-.plusFirst {
+#plusFirst {
   position: sticky;
   display: block;
   float: right;
+  font-weight: 900;
+  right: 0px;
+  bottom: 1px;
+  font-size: calc(30px + 3vw);
+  color: white;
+  text-shadow: 2px 2px black;
 }
 
 .header {
@@ -79,7 +86,7 @@ body {
   align-items: center;
 }
 
-#form {
+form {
   display: none;
   position: relative;
   margin: 0 auto;
@@ -89,9 +96,7 @@ body {
   border-radius: 3px;
 }
 
-#form form {
-  display: inherit;
-}
+
 
 textarea {
   margin-top: 1vh;
