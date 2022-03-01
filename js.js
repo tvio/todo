@@ -1,3 +1,5 @@
+
+//1.3.2022
 // refaktor na form[0], ale zatim nereaguje tlacitko plus na zobraznei formu, opravit chybu v konzoli
 
 //nejde mi add do databaze, nekde to volam driv nez pri stisku toho addtlacitka
