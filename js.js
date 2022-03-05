@@ -23,10 +23,10 @@
 import db from './db'
 const todo = {
   //deleteTag : document.querySelector('.delete'),
-  addForm: document.querySelector('plusFirst'),
-  addTag: document.querySelector('plus'),
+  addForm: document.getElementById('plusFirst'),
+  addTag: document.getElementById('plus'),
   mainTag: document.getElementById('con'),
-  formTag: document.getElementById('form'),
+  formTag: document.getElementsByTagName('form'),
 
   //deleteTag: 'dynamic predelat',
   async add(ukol, termin, top, barva) {
