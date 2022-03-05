@@ -1,3 +1,5 @@
+// 5.3
+// nezobrazuje mi to druhe plus
 
 //1.3.2022
 // refaktor na form[0], ale zatim nereaguje tlacitko plus na zobraznei formu, opravit chybu v konzoli
@@ -78,6 +80,7 @@ window.onload = () => {
   todo.addForm.addEventListener('click', () => {
     console.log('clicked')
     console.log('form', todo.formTag)
+    todo.addTag.style.display = 'block'
     todo.formTag[0].style.display = 'block'
     todo.addForm.style.display = 'none'
   })
