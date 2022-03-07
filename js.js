@@ -1,3 +1,7 @@
+//7.3
+//funguje insert do db vececi z formu. Dodelat predelani timestamp na datum local. Pridame teda moment. 
+//Zmenit barvu z return data na obarveni polzky
+
 // 5.3
 // nezobrazuje mi to druhe plus
 
@@ -62,7 +66,8 @@ window.onload = () => {
     //cele by to melo jet sekvence
     //atributy z formu predej do DB
     //pridej try/catchblcok kdyz insert nedopadne
-    todo.add(ukol.value, termin.value, top.value, barva.value)
+    console.log(ukol[0].value, termin[0].value, top[0].value, barva[0].value)
+    todo.add(ukol[0].value, termin[0].value, top[0].value, barva[0].value)
     //napis hlasku o pridani
 
     //vypni form a zobraz puvoni plusitko
