@@ -80,12 +80,13 @@ const db = {
       const querySnapshot = await getDocs(q)
       querySnapshot.forEach((doc) => {
         // console.log(doc.id, ' => ', doc.data())
-        this.conTag.innerHTML += `<p class="karta" id=${doc.id}>id:${
-          doc.id
-        },data:${doc.data().ukol},${doc.data().termin},${doc.data().top},${
-          doc.data().barva
-        }<i class="delete material-icons">delete</i></p>`
+        this.conTag.innerHTML += `<p class="karta" style="background-color:${doc.data().barva}" id=${doc.id}>id:${ doc.id},data:${doc.data().ukol},${doc.data().termin},${doc.data().top}
+        
+          <i class="delete material-icons">delete</i></p>`
+          
+        
       })
+    
     } catch (e) {
       console.log(e)
     }
