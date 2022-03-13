@@ -12,19 +12,26 @@ import {
   doc,
   addDoc,
   deleteDoc,
+  enableLogging,
 } from 'firebase/firestore'
 // import { GoogleAuthProvider } from 'firebase/auth'
 import { initializeApp } from 'firebase/app'
+
 import {
   getAuth,
+  getRedirectResult,
   signInWithEmailAndPassword,
   signInAnonymously,
+  GoogleAuthProvider,
+  signInWithRedirect,
+  signInWithPopup,
 } from 'firebase/auth'
 
 const db = {
   conTag: document.getElementById('con'),
   db: 'datbase object for firebase',
   app: 'app object for firebase',
+  authRes: 'resp z google authentikace',
   async init() {
     // Your web app's Firebase configuration
     const firebaseConfig = {
@@ -34,8 +41,13 @@ const db = {
       storageBucket: 'todo-e4df6.appspot.com',
       messagingSenderId: '320940785976',
       appId: '1:320940785976:web:03c860b39f4e2ea77841cd',
+      enableLogging: true,
     }
+
     this.app = initializeApp(firebaseConfig)
+    auth = getAuth()
+    //auth.languageCode = 'cz'
+    this.db = getFirestore(this.app)
 
     // //anonymous
     // const auth = getAuth()
@@ -51,18 +63,45 @@ const db = {
     //   })
 
     //Sign in with email and pass.
-    const auth = getAuth()
-    this.db = getFirestore(this.app)
-    await signInWithEmailAndPassword(auth, 'tvio@centrum.cz', '123Heslo')
-      .then((userCredential) => {
-        // Signed in
-        const user = userCredential.user
-        // console.log(user)
+    //   const auth = getAuth()
+    //   this.db = getFirestore(this.app)
+    //   await signInWithEmailAndPassword(auth, 'tvio@centrum.cz', '123Heslo')
+    //     .then((userCredential) => {
+    //       // Signed in
+    //       const user = userCredential.user
+    //       // console.log(user)
+    //       // ...
+    //     })
+    //     .catch((error) => {
+    //       const errorCode = error.code
+    //       const errorMessage = error.message
+    //     })
+
+    //Sing in with Google account
+
+    const provider = new GoogleAuthProvider()
+
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result)
+        const token = credential.accessToken
+        // The signed-in user info.
+        const user = result.user
+        this.authRes = result
+        console.log(result)
         // ...
       })
       .catch((error) => {
+        // Handle Errors here.
         const errorCode = error.code
         const errorMessage = error.message
+        // The email of the user's account used.
+        const email = error.email
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error)
+        console.log(error)
+        // ...
       })
   },
 
@@ -74,19 +113,20 @@ const db = {
       const q = query(
         collection(this.db, 'ukoly')
         //where('hodnota', '==', 'test')
-        // where('author', '==', user.uid)
+        //where('author', '==', 'karel')
       )
       //console.log('deje se neco?')
       const querySnapshot = await getDocs(q)
       querySnapshot.forEach((doc) => {
         // console.log(doc.id, ' => ', doc.data())
-        this.conTag.innerHTML += `<p class="karta" style="background-color:${doc.data().barva}" id=${doc.id}>id:${ doc.id},data:${doc.data().ukol},${doc.data().termin},${doc.data().top}
+        this.conTag.innerHTML += `<p class="karta" style="background-color:${
+          doc.data().barva
+        }" id=${doc.id}>id:${doc.id},data:${doc.data().ukol},${
+          doc.data().termin
+        },${doc.data().top}
         
           <i class="delete material-icons">delete</i></p>`
-          
-        
       })
-    
     } catch (e) {
       console.log(e)
     }

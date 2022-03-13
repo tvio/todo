@@ -1,3 +1,6 @@
+//13.3
+//funguje google authenticator pres popup, dopilovat pres redirect
+
 //9.3
 //funguje zobrazeni barvy, datum se nejak zahadne ukazuje normonale, proc?
 // upravit css aby se form ukazovl normalne na vsech velikostech, media guery
@@ -5,7 +8,7 @@
 // dat do dat jmeno z autentizace, upravit query
 
 //7.3
-//funguje insert do db vececi z formu. Dodelat predelani timestamp na datum local. Pridame teda moment. 
+//funguje insert do db vececi z formu. Dodelat predelani timestamp na datum local. Pridame teda moment.
 //Zmenit barvu z return data na obarveni polzky
 
 // 5.3
