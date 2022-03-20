@@ -1,4 +1,6 @@
 //20.3
+//Zkousim redirect na jinou page, ale podle me porad nejde lgoinwuthredirect, asi to bude hazet chybu
+
 // Ale nejde porad kod uvnitr signinwithredirect
 //Zkousel jsem Dat uplnej init mimo, aby se znovu negeneroval auth
 //udelat logou od google
