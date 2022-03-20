@@ -1,3 +1,8 @@
+//20.3
+// Ale nejde porad kod uvnitr signinwithredirect
+//Zkousel jsem Dat uplnej init mimo, aby se znovu negeneroval auth
+//udelat logou od google
+
 //13.3
 //funguje google authenticator pres popup, dopilovat pres redirect
 

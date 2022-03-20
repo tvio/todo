@@ -19,6 +19,7 @@ import { initializeApp } from 'firebase/app'
 
 import {
   getAuth,
+  onAuthStateChanged,
   getRedirectResult,
   signInWithEmailAndPassword,
   signInAnonymously,
@@ -31,24 +32,27 @@ const db = {
   conTag: document.getElementById('con'),
   db: 'datbase object for firebase',
   app: 'app object for firebase',
-  authRes: 'resp z google authentikace',
+  auth: 'nic',
+  user: 'info o useru z google',
   async init() {
     // Your web app's Firebase configuration
-    const firebaseConfig = {
-      apiKey: 'AIzaSyCioN4bjNxS7XtD_-Dl8IBRXC-G3BzUNqg',
-      authDomain: 'todo-e4df6.firebaseapp.com',
-      projectId: 'todo-e4df6',
-      storageBucket: 'todo-e4df6.appspot.com',
-      messagingSenderId: '320940785976',
-      appId: '1:320940785976:web:03c860b39f4e2ea77841cd',
-      enableLogging: true,
+    if ((this.auth = 'nic')) {
+      const firebaseConfig = {
+        apiKey: 'AIzaSyCioN4bjNxS7XtD_-Dl8IBRXC-G3BzUNqg',
+        authDomain: 'todo-e4df6.firebaseapp.com',
+        projectId: 'todo-e4df6',
+        storageBucket: 'todo-e4df6.appspot.com',
+        messagingSenderId: '320940785976',
+        appId: '1:320940785976:web:03c860b39f4e2ea77841cd',
+        enableLogging: true,
+      }
+
+      this.app = initializeApp(firebaseConfig)
+      this.auth = getAuth()
+      console.log(this.auth)
+      //auth.languageCode = 'cz'
+      this.db = getFirestore(this.app)
     }
-
-    this.app = initializeApp(firebaseConfig)
-    auth = getAuth()
-    //auth.languageCode = 'cz'
-    this.db = getFirestore(this.app)
-
     // //anonymous
     // const auth = getAuth()
     // signInAnonymously(auth)
@@ -78,31 +82,36 @@ const db = {
     //     })
 
     //Sing in with Google account
+    const user = this.auth.currentUser
+    console.log(user)
+    if (user === null) {
+      const provider = new GoogleAuthProvider()
 
-    const provider = new GoogleAuthProvider()
+      signInWithRedirect(this.auth, provider)
+        .then(getRedirectResult(this.auth))
+        .then((result) => {
+          // This gives you a Google Access Token. You can use it to access the Google API.
+          const credential = GoogleAuthProvider.credentialFromResult(result)
+          const token = credential.accessToken
+          // The signed-in user info.
+          const user = result.user
 
-    signInWithPopup(auth, provider)
-      .then((result) => {
-        // This gives you a Google Access Token. You can use it to access the Google API.
-        const credential = GoogleAuthProvider.credentialFromResult(result)
-        const token = credential.accessToken
-        // The signed-in user info.
-        const user = result.user
-        this.authRes = result
-        console.log(result)
-        // ...
-      })
-      .catch((error) => {
-        // Handle Errors here.
-        const errorCode = error.code
-        const errorMessage = error.message
-        // The email of the user's account used.
-        const email = error.email
-        // The AuthCredential type that was used.
-        const credential = GoogleAuthProvider.credentialFromError(error)
-        console.log(error)
-        // ...
-      })
+          console.log(this.auth.currentUser)
+
+          // ...
+        })
+        .catch((error) => {
+          // Handle Errors here.
+          const errorCode = error.code
+          const errorMessage = error.message
+          // The email of the user's account used.
+          const email = error.email
+          // The AuthCredential type that was used.
+          const credential = GoogleAuthProvider.credentialFromError(error)
+          console.log(error)
+          // ...
+        })
+    }
   },
 
   async readAll() {
