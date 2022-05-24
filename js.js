@@ -1,3 +1,9 @@
+//24.5
+//Funguje mi signwithredirect, predsadil jsem onauthstatechange, jinak se mi to cyklylo.
+//Predelat z index2.html na puvodni html.
+// Zobrozit preihlaseneneho
+//Procist ukoly
+
 //20.3
 //Zkousim redirect na jinou page, ale podle me porad nejde lgoinwuthredirect, asi to bude hazet chybu
 

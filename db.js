@@ -51,70 +51,96 @@ const db = {
 
     this.app = initializeApp(firebaseConfig)
     this.auth = getAuth()
-    //console.log(this.auth)
-    //console.log(this.auth.config)
-    //auth.languageCode = 'cz'
-    this.db = getFirestore(this.app)
+    onAuthStateChanged(this.auth, (user) => {
+      if (user) {
+        // User is signed in, see docs for a list of available properties
+        // https://firebase.google.com/docs/reference/js/firebase.User
+        const uid = user.uid
+        console.log(user.email)
+        window.location.replace('index2.html')
+        // ...
+      } else {
+        // User is signed out
+        // ...
 
-    // //anonymous
-    // const auth = getAuth()
-    // signInAnonymously(auth)
-    //   .then(() => {
-    //     console.log(auth)
-    //     // Signed in..
-    //   })
-    //   .catch((error) => {
-    //     const errorCode = error.code
-    //     const errorMessage = error.message
-    //     // ...
-    //   })
+        //console.log(this.auth)
+        //console.log(this.auth.config)
+        //auth.languageCode = 'cz'
+        this.db = getFirestore(this.app)
 
-    //Sign in with email and pass.
-    //   const auth = getAuth()
-    //   this.db = getFirestore(this.app)
-    //   await signInWithEmailAndPassword(auth, 'tvio@centrum.cz', '123Heslo')
-    //     .then((userCredential) => {
-    //       // Signed in
-    //       const user = userCredential.user
-    //       // console.log(user)
-    //       // ...
-    //     })
-    //     .catch((error) => {
-    //       const errorCode = error.code
-    //       const errorMessage = error.message
-    //     })
+        // //anonymous
+        // const auth = getAuth()
+        // signInAnonymously(auth)
+        //   .then(() => {
+        //     console.log(auth)
+        //     // Signed in..
+        //   })
+        //   .catch((error) => {
+        //     const errorCode = error.code
+        //     const errorMessage = error.message
+        //     // ...
+        //   })
 
-    //Sing in with Google account
+        //Sign in with email and pass.
+        //   const auth = getAuth()
+        //   this.db = getFirestore(this.app)
+        //   await signInWithEmailAndPassword(auth, 'tvio@centrum.cz', '123Heslo')
+        //     .then((userCredential) => {
+        //       // Signed in
+        //       const user = userCredential.user
+        //       // console.log(user)
+        //       // ...
+        //     })
+        //     .catch((error) => {
+        //       const errorCode = error.code
+        //       const errorMessage = error.message
+        //     })
 
-    //console.log(user)
+        //Sing in with Google account
 
-    const provider = new GoogleAuthProvider()
+        //console.log(user)
 
-    signInWithRedirect(this.auth, provider)
-      .then(
-        getRedirectResult((result) => {
-          // This gives you a Google Access Token. You can use it to access the Google API.
-          const credential = GoogleAuthProvider.credentialFromResult(result)
-          const token = credential.accessToken
-          // The signed-in user info.
-          const user = result.user
+        const provider = new GoogleAuthProvider()
 
-          console.log(result)
+        signInWithRedirect(this.auth, provider).then(
+          getRedirectResult((result) => {
+            // This gives you a Google Access Token. You can use it to access the Google API.
+            const credential = GoogleAuthProvider.credentialFromResult(result)
+            const token = credential.accessToken
+            // The signed-in user info.
+            const user = result.user
 
-          // ...
-        }).catch((error) => {
-          //     // Handle Errors here.
-          const errorCode = error.code
-          const errorMessage = error.message
-          //     // The email of the user's account used.
-          const email = error.email
-          //     // The AuthCredential type that was used.
-          const credential = GoogleAuthProvider.credentialFromError(error)
-          console.log(error)
-          //     // ...
+            console.log(result)
+
+            // ...
+          }).catch((error) => {
+            //     // Handle Errors here.
+            const errorCode = error.code
+            const errorMessage = error.message
+            //     // The email of the user's account used.
+            const email = error.email
+            //     // The AuthCredential type that was used.
+            const credential = GoogleAuthProvider.credentialFromError(error)
+            console.log('err' + error)
+            //     // ...
+          })
+        )
+        this.auth = getAuth()
+        onAuthStateChanged(this.auth, (user) => {
+          if (user) {
+            // User is signed in, see docs for a list of available properties
+            // https://firebase.google.com/docs/reference/js/firebase.User
+            const uid = user.uid
+            console.log(uid)
+            window.location('index2.html')
+            // ...
+          } else {
+            // User is signed out
+            // ...
+          }
         })
-      )
-      .then(window.location.replace('index2.html'))
+      }
+    })
   },
 
   async readAll() {
