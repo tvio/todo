@@ -50,14 +50,18 @@ const db = {
     }
 
     this.app = initializeApp(firebaseConfig)
+    this.db = getFirestore(this.app)
     this.auth = getAuth()
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
         // User is signed in, see docs for a list of available properties
         // https://firebase.google.com/docs/reference/js/firebase.User
-        const uid = user.uid
+        //const uid = user.uid
+        //console.log(user.email)
         console.log(user.email)
-        window.location.replace('index2.html')
+        console.log(user.reloadUserInfo.displayName)
+        this.user = user.reloadUserInfo.displayName + ' ' + user.email
+        //window.location.replace('index2.html')
         // ...
       } else {
         // User is signed out
@@ -66,8 +70,8 @@ const db = {
         //console.log(this.auth)
         //console.log(this.auth.config)
         //auth.languageCode = 'cz'
-        this.db = getFirestore(this.app)
 
+        //this.db = getFirestore()
         // //anonymous
         // const auth = getAuth()
         // signInAnonymously(auth)
@@ -125,20 +129,7 @@ const db = {
             //     // ...
           })
         )
-        this.auth = getAuth()
-        onAuthStateChanged(this.auth, (user) => {
-          if (user) {
-            // User is signed in, see docs for a list of available properties
-            // https://firebase.google.com/docs/reference/js/firebase.User
-            const uid = user.uid
-            console.log(uid)
-            window.location('index2.html')
-            // ...
-          } else {
-            // User is signed out
-            // ...
-          }
-        })
+        //this.auth = getAuth()
       }
     })
   },
@@ -146,7 +137,6 @@ const db = {
   async readAll() {
     try {
       //const user = auth.currentUser
-      //console.log(this.db)
 
       const q = query(
         collection(this.db, 'ukoly')
@@ -167,6 +157,7 @@ const db = {
       })
     } catch (e) {
       console.log(e)
+      c
     }
   },
   async delete(id) {

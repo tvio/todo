@@ -1,3 +1,5 @@
+//12.5
+// nejde mi vlozit user do hlavniho js
 //24.5
 //Funguje mi signwithredirect, predsadil jsem onauthstatechange, jinak se mi to cyklylo.
 //Predelat z index2.html na puvodni html.
@@ -55,6 +57,7 @@ const todo = {
   addTag: document.getElementById('plus'),
   mainTag: document.getElementById('con'),
   formTag: document.getElementsByTagName('form'),
+  user: document.getElementById('user'),
 
   //deleteTag: 'dynamic predelat',
   async add(ukol, termin, top, barva) {
@@ -67,6 +70,7 @@ const todo = {
   },
   async runx() {
     await db.init()
+    this.user.innerHTML = db.user
     await db.readAll()
   },
   async delete(id) {
