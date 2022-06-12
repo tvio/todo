@@ -1,3 +1,5 @@
+//12,5
+// mam tam uzivatele
 //12.5
 // nejde mi vlozit user do hlavniho js
 //24.5
@@ -70,8 +72,9 @@ const todo = {
   },
   async runx() {
     await db.init()
-    this.user.innerHTML = db.user
+
     await db.readAll()
+    this.user.innerHTML = db.user
   },
   async delete(id) {
     await db.delete(id)
