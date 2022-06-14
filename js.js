@@ -1,6 +1,10 @@
-//12,5
+// udelej lepsi zobrazeni dat a sort podle priority first  a data
+// udelej selecty podle uzivatele
+//14.6
+// css s header na prihlaseneho usera
+//12.6
 // mam tam uzivatele
-//12.5
+//12.6
 // nejde mi vlozit user do hlavniho js
 //24.5
 //Funguje mi signwithredirect, predsadil jsem onauthstatechange, jinak se mi to cyklylo.
