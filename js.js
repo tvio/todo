@@ -78,10 +78,10 @@ const todo = {
     await db.readAll()
   },
   async runx() {
-    const resp = await db.init()
-    console.log(resp)
-    const resp2 = await db.readAll()
-    console.log(resp2)
+    db.init().then(() => {
+      db.readAll()
+    })
+
     this.user.innerHTML = db.user.displayName + ' ' + db.user.email
   },
   async delete(id) {
