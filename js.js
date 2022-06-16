@@ -1,3 +1,6 @@
+//16.6 pridal jsem user podle uid, ale nanacte se mi read all protoze nepocka na await init
+//nutno pridat opravdu cekani na init , resp. await az statechange dotlaci usera
+
 // udelej lepsi zobrazeni dat a sort podle priority first  a data
 // udelej selecty podle uzivatele
 //14.6
@@ -66,8 +69,8 @@ const todo = {
   user: document.getElementById('user'),
 
   //deleteTag: 'dynamic predelat',
-  async add(ukol, termin, top, barva) {
-    await db.add(ukol, termin, top, barva)
+  async add(ukol, termin, top, barva, user) {
+    await db.add(ukol, termin, top, barva, user)
     console.log('jdeme na cteni po vlozeni')
     while (this.mainTag.firstChild) {
       this.mainTag.firstChild.remove()
@@ -75,10 +78,11 @@ const todo = {
     await db.readAll()
   },
   async runx() {
-    await db.init()
-
-    await db.readAll()
-    this.user.innerHTML = db.user
+    const resp = await db.init()
+    console.log(resp)
+    const resp2 = await db.readAll()
+    console.log(resp2)
+    this.user.innerHTML = db.user.displayName + ' ' + db.user.email
   },
   async delete(id) {
     await db.delete(id)
@@ -100,7 +104,13 @@ window.onload = () => {
     //atributy z formu predej do DB
     //pridej try/catchblcok kdyz insert nedopadne
     console.log(ukol[0].value, termin[0].value, top[0].value, barva[0].value)
-    todo.add(ukol[0].value, termin[0].value, top[0].value, barva[0].value)
+    todo.add(
+      ukol[0].value,
+      termin[0].value,
+      top[0].value,
+      barva[0].value,
+      db.user.uid
+    )
     //napis hlasku o pridani
 
     //vypni form a zobraz puvoni plusitko
