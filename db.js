@@ -34,6 +34,7 @@ const db = {
   app: 'app object for firebase',
   auth: 'nic',
   user: 'info o useru z google',
+  collection: 'kolekce ukoly',
 
   async init() {
     return new Promise((resolve, reject) => {
@@ -53,6 +54,7 @@ const db = {
       this.app = initializeApp(firebaseConfig)
       this.db = getFirestore(this.app)
       this.auth = getAuth()
+      this.collection = collection(this.db, 'ukoly')
 
       const unsubscribe = onAuthStateChanged(
         this.auth,
@@ -151,14 +153,18 @@ const db = {
     try {
       //const user = auth.currentUser
       console.log('nacitam data')
-      console.log(this.user)
+      console.log(this.user.uid)
       const q = query(
-        //collection(this.db, 'ukoly', where('user', '==', this.user.uid))
-        collection(this.db, 'ukoly')
+        this.collection,
+        'ukoly',
+        where('user', '==', this.user.uid)
       )
-      //console.log('deje se neco?')
-      const querySnapshot = await getDocs(q)
+      // collection(this.db, 'ukoly')
+
+      const querySnapshot = await get(q)
+      console.log(querySnapshot.docs[0].data)
       querySnapshot.forEach((doc) => {
+        console.log(doc.data())
         // console.log(doc.id, ' => ', doc.data())
         this.conTag.innerHTML += `<p class="karta" style="background-color:${
           doc.data().barva

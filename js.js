@@ -1,5 +1,7 @@
 //02.07
+//nejde mi podminka where, nic nenajde, rozbil jsem asi funkci collection
 // nemel jsem await  u getDocs - bug, prestim nesmyslne odmazano
+
 //16.6 pridal jsem user podle uid, ale nanacte se mi read all protoze nepocka na await init
 //nutno pridat opravdu cekani na init , resp. await az statechange dotlaci usera
 // udelej lepsi zobrazeni dat a sort podle priority first  a data
