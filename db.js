@@ -153,10 +153,11 @@ const db = {
       console.log('nacitam data')
       console.log(this.user)
       const q = query(
-        collection(this.db, 'ukoly', where('user', '==', this.user.uid))
+        //collection(this.db, 'ukoly', where('user', '==', this.user.uid))
+        collection(this.db, 'ukoly')
       )
       //console.log('deje se neco?')
-      const querySnapshot = getDocs(q)
+      const querySnapshot = await getDocs(q)
       querySnapshot.forEach((doc) => {
         // console.log(doc.id, ' => ', doc.data())
         this.conTag.innerHTML += `<p class="karta" style="background-color:${

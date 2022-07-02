@@ -1,6 +1,7 @@
+//02.07
+// nemel jsem await  u getDocs - bug, prestim nesmyslne odmazano
 //16.6 pridal jsem user podle uid, ale nanacte se mi read all protoze nepocka na await init
 //nutno pridat opravdu cekani na init , resp. await az statechange dotlaci usera
-
 // udelej lepsi zobrazeni dat a sort podle priority first  a data
 // udelej selecty podle uzivatele
 //14.6
@@ -79,10 +80,9 @@ const todo = {
   },
   async runx() {
     db.init().then(() => {
+      this.user.innerHTML = db.user.displayName + ' ' + db.user.email
       db.readAll()
     })
-
-    this.user.innerHTML = db.user.displayName + ' ' + db.user.email
   },
   async delete(id) {
     await db.delete(id)
