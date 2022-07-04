@@ -34,7 +34,7 @@ const db = {
   app: 'app object for firebase',
   auth: 'nic',
   user: 'info o useru z google',
-  collection: 'kolekce ukoly',
+  
 
   async init() {
     return new Promise((resolve, reject) => {
@@ -54,7 +54,7 @@ const db = {
       this.app = initializeApp(firebaseConfig)
       this.db = getFirestore(this.app)
       this.auth = getAuth()
-      this.collection = collection(this.db, 'ukoly')
+      
 
       const unsubscribe = onAuthStateChanged(
         this.auth,
@@ -155,13 +155,13 @@ const db = {
       console.log('nacitam data')
       console.log(this.user.uid)
       const q = query(
-        this.collection,
-        'ukoly',
+        collection(this.db,'ukoly'),
+        
         where('user', '==', this.user.uid)
       )
       // collection(this.db, 'ukoly')
 
-      const querySnapshot = await get(q)
+      const querySnapshot = await getDocs(q)
       console.log(querySnapshot.docs[0].data)
       querySnapshot.forEach((doc) => {
         console.log(doc.data())
